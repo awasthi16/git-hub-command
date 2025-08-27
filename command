@@ -117,3 +117,44 @@ git cherry-pick <commit> → Apply a specific commit to the current branch.
 git blame <file> → Show who modified each line of a file.
 
 git clean -fd → Remove untracked files & directories.
+
+
+↩️ Undoing changes (safely)
+
+Golden rule: if it’s pushed, prefer revert over reset.
+
+Discard changes in working directory (not staged)
+
+Modern: git restore --worktree <file> or simply git restore <file>
+
+Old: git checkout -- <file>
+
+Unstage but keep changes
+
+Modern: git restore --staged <file>
+
+Old: git reset HEAD <file>
+
+Undo the last commit, keep the changes staged
+
+git reset --soft HEAD~1
+
+Move branch pointer and keep working changes
+
+git reset --mixed <commit> (default mode)
+
+Hard reset (dangerous)
+
+git reset --hard <commit>
+Resets branch, staging, and working dir to <commit>. Destroys uncommitted work.
+
+Revert a bad commit (safe for shared branches)
+
+git revert <commit> creates a new commit that undoes the effects.
+
+Amend the most recent commit
+
+git commit --amend (edit message or include forgotten files).
+If already pushed, this rewrites history—push with care.
+
+Lifesaver: git reflog shows where HEAD/branches have pointed. You can recover “lost” commits by resetting to a reflog entry.
